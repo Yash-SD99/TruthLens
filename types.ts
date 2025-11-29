@@ -1,8 +1,17 @@
+
 export enum VerdictType {
   REAL = 'REAL',
   SUSPICIOUS = 'SUSPICIOUS',
   FAKE = 'FAKE',
   UNVERIFIED = 'UNVERIFIED'
+}
+
+export interface AgentAnalysis {
+  sourceScore: number; // 0-100
+  sourceNotes: string; // "Reuters is a Tier 1 wire service..."
+  contentScore: number; // 0-100 (100 = neutral/objective, 0 = sensational/biased)
+  contentNotes: string; // "Headline uses emotionally charged language..."
+  evidence: string[];
 }
 
 export interface NewsArticle {
@@ -13,9 +22,13 @@ export interface NewsArticle {
   url?: string;
   imageUrl?: string;
   publishedAt: string;
+  
+  // Final Verdict
   verdict: VerdictType;
   confidenceScore: number; // 0-100
-  reasoning: string;
+  
+  // Explainability (Agent Outputs)
+  agentAnalysis: AgentAnalysis;
   topics: string[];
 }
 
@@ -39,9 +52,4 @@ export interface UserProfile {
   history: VerificationResult[];
 }
 
-export interface GeminiConfig {
-  apiKey: string;
-}
-
-// Navigation state
 export type PageView = 'FEED' | 'VERIFY' | 'EDUCATION' | 'PROFILE';
