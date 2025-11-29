@@ -1,0 +1,7 @@
+{
+  "name": "TruthLens",
+  "description": "An agentic AI platform for real-time news verification, deep-fake detection, and personalized credible news aggregation.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
